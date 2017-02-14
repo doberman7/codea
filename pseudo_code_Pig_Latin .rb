@@ -7,6 +7,7 @@ ELSE replace the word with its pig latin equivalent.#"pig" → "igpay"
   SET the consonants at the end of the word and add "ay"#ig→p→"ay"
 ENDIF
 RETURN the pig-latin word
+<<<<<<< HEAD
 =begin
   word = gets.chomp
   letter = ""
@@ -34,7 +35,10 @@ RETURN the pig-latin word
 #     PUSH the word on the array
 #   ENDWHILE
 # RETURN the pig-latin oration
+=======
+>>>>>>> 5f10868b36efdd6f1de461725f267e8d79c173db
 
+#--------------------
 Script: Complete oration converter to Pig Latin
 
 PRINT "add a word "
