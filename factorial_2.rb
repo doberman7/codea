@@ -1,5 +1,4 @@
 #comentario de prueba
-
 def fact(n)
   if n == 0
     1
@@ -8,4 +7,4 @@ def fact(n)
   end
 end
 
-p fact(8)
+p fact(4)
