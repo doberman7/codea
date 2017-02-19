@@ -31,3 +31,7 @@ Recuerda escribir pseudocódigo y crear pruebas como driver code antes de empeza
 
 Finalmente refactoriza tu método. Piensa si existe algún proceso que estés repitiendo varías veces y busca una mejor manera de hacerlo, como pista busca como funciona el método select.
 =end
+
+def anagrams_for(word,diccionario)
+
+end
