@@ -9,15 +9,18 @@ X | X | X |
 --  --  --
 =end
 def gato
-letters = ["X" , "O"]
-9.times do
- = letters.sample
- if tiro
+p convinacion  = "X" , "O" , "O", "O", "X", "O","O", "O", "X"
 
- end
+9.times do
+  throw_  = options.sample
+  if throw_ == "X"
+
+  else
+
+  end
 end
 
-
+=begin
 convinacion  = "X" , "O" , "O", "O", "X", "O","O", "O", "X"#arreglo con 9 elementos
 result = ""
 	 thre_arrays_of_3 = Array.new(3) {convinacion.pop(3)}#se crea arreglo con tres arreglos con tres elementos cada uno
@@ -30,4 +33,5 @@ result = ""
 	 end
 	 result
 end
+=end
   gato
