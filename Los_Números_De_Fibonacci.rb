@@ -16,12 +16,12 @@ def fibonacci_iterative(n)
  fibonacci_sucesion_result
 end
 
-# p fibonacci_iterative(0) == 0
-# p fibonacci_iterative(1) == 1
-# p fibonacci_iterative(2) == 1
-# p fibonacci_iterative(3) == 2
-# p fibonacci_iterative(4) == 3
-#p  fibonacci_iterative(5) == 5
+p fibonacci_iterative(0) == 0
+p fibonacci_iterative(1) == 1
+p fibonacci_iterative(2) == 1
+p fibonacci_iterative(3) == 2
+p fibonacci_iterative(4) == 3
+p  fibonacci_iterative(5) == 5
 
 
 def fibonacci_recursive(n)
@@ -32,11 +32,11 @@ def fibonacci_recursive(n)
     fibonacci_recursive(n-1) + fibonacci_recursive(n-2)
   end
 end
-# p fibonacci_recursive(1) == 1
-# p fibonacci_recursive(2) == 1
-# p fibonacci_recursive(3) == 2
-# p fibonacci_recursive(4) == 3
-# p fibonacci_recursive(5) == 5
+p fibonacci_recursive(1) == 1
+p fibonacci_recursive(2) == 1
+p fibonacci_recursive(3) == 2
+p fibonacci_recursive(4) == 3
+p fibonacci_recursive(5) == 5
 
 puts Benchmark.measure {fibonacci_iterative(38)}#measure and report the time f ITERATIVEE
 puts Benchmark.measure {fibonacci_recursive(38)}#measure and report the time f RECURSIVE, it is much slowe than iterative
