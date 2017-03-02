@@ -2,7 +2,7 @@ require 'benchmark'
 
 #a source: https://gist.github.com/Morralito/5038944
 def fibonacci_iterative(n)
-   if n==0# CONDITION if argument 'n' is 0
+  if n==0# CONDITION if argument 'n' is 0
     fibonacci_sucesion_result =  0# ASSINGN value 0
    else
     previous_number_at_fibonacci = 0 #ASSIGN equivalent to n-1,
