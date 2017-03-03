@@ -1,7 +1,3 @@
-#.ljust ajusta la cadena de sólo si el argumento es > a string.length     # "hello".ljust(20, "123")   #=> "hello123412341234123"
-#[["POEMA", "CANCION", "RONDAS", "RIMAS"],"POEMAXCXXXXAXXSXNXAAXCMXDXIXXNROXXOXNXXR"]
-#[["MANGO", "SANDIA", "MELON", "PLATANO"],"XXXXPXXXXLXAMXAXIEXTXDLXAXNOXNMANGOXSXXX"]
-#[["ROJO", "VERDE", "AZUL", "NEGRO"],"OJORXXXXXXXEXXOXDXRXXRGLXXEXUXNVXZXXXXAX"]
 class Board
 	@@boards_templates = #.ljust ajusta la cadena de sólo si el argumento es > a string.length     # "hello".ljust(20, "123")   #=> "hello123412341234123"
 	[["POEMA", "CANCION", "RONDAS", "RIMAS"],"POEMAXCXXXXAXXSXNXAAXCMXDXIXXNROXXOXNXXR"]
@@ -24,7 +20,7 @@ class Board
 	end
 
 	def find_up_down
-		word = @@boards_templates [0][1]#POEMA
+		word = @@boards_templates [0][1]#CANCION
 		vertical = ""
 		index_move = 0
 		until vertical.include? word #HASTA que vertical incuya la palabra buscada
@@ -39,7 +35,7 @@ class Board
 	def find_left_to_rigth
 		word = @@boards_templates [0][0]#MANGO
 		horizontal = ""
-		index_move = 0
+		#index_move = 0
 				@@soup.each_with_index do |fila, index_f|#multidimensional so
 					 fila.join
 					 if fila.include? word
@@ -51,9 +47,9 @@ class Board
 	def find_down_up
 		inverted_board = []
 		@@soup.reverse.each_with_index do |ary,ind|
-			 inverted_board << ary.join.reverse
+			 p inverted_board << ary.join.reverse
 		end   # invertir tablero
-		inverted_board
+		#inverted_board
 		word = @@boards_templates [0][2]#RONDAS
 		vertical = ""
 		index_move = 0
@@ -62,7 +58,7 @@ class Board
 				 vertical << array[0][index_move] #empujar de cada elemento 0 de las filas en vertical
 	 		end# string con loetras de columna creado
 				index_move+=1  # se avanza en el index de las columnas
-				p vertical #retorno implicito
+				 vertical #retorno implicito
 		end
 	end
 
