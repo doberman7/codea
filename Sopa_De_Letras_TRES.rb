@@ -82,7 +82,8 @@ class Board
 	end
 
 	def diagonal_superior_derecha
-		p @@soup [1][0][4]
+		puts @@soup
+		p @@soup [0][0][0]
 	end
 
   def initialize
