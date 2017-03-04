@@ -7,7 +7,7 @@ class Board
 
 	def made_soup
 		strg = @@boards_templates [1]# ASSGIN the boards_templates[-1] to a variable
-		place_inner_array = 0 # ASSIG a variable for to being use for the next loop
+		place_inner_array = 0 # ASSIG a variable to be use for the next loop
 		init = 0# ASSIGN a variable to  index[0] for tha iner array
 		final = 4# ASSIGN a variable to  index[-1] for the iner array
 		until final >= strg.length# START the loop that create's array's of 4 element each time, stops until "final" >= 40
@@ -81,9 +81,27 @@ class Board
 		  p "#{word} encontrada de derecha a izquierda" if result_rigth_to_left != nil #SI result_up_down no esta vacio se imprime resultado
 	end
 
-	def diagonal_superior_derecha
-		puts @@soup
-		p @@soup [0][0][0]
+	def diagonal_inf_rigth
+		# @@soup [row]  [outer_array] [column]
+		# @@soup [1]     [0]           [1]
+		index_row = 0 #indice de la fila
+		index_column = 0 #indci
+		word = "A"#@@boards_templates [0][0]#palabra buscada
+		index_move = 0 #variable para moverse a tràves de las columnas
+		result = nil #variable para colocar resultado si la palabra es colocada
+		until index_move >= @@soup[0][0].length #hasta que el indice alcance la longitud del la sopa
+			transversal = []#arreglo para 
+			 transversal << one = @@soup [index_row][0][index_column]
+			 transversal << two = @@soup [index_row+=1][0][index_column+=1]
+			 transversal << three = @@soup [index_row+=1][0][index_column+=1]
+			 transversal << four = @@soup [index_row+=1][0][index_column+=1]
+			 transversal << five = @@soup [index_row+=1][0][index_column+=1]
+			index_row = 0
+			index_move += 1
+			index_column = index_move
+			result = transversal.join  if  transversal.compact.join.include? word
+		end
+		  p result if result!=nil
 	end
 
   def initialize
@@ -103,4 +121,4 @@ end
 
 board = Board.new
 board.made_soup
-board.diagonal_superior_derecha
+board.diagonal_inf_rigth
