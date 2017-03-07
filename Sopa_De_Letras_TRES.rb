@@ -5,7 +5,7 @@ class Board
 	#[["ROJO", "VERDE", "AZUL", "NEGRO"],"OJORXXXXXXXEXXOXDXRXXRGLXXEXUXNVXZXXXXAX"]
 	@@soup = Array.new(8) { Array.new(0) } # CREATE a multidimensional array of 8 row's
 
-	def made_soup
+	def made_soup #para crear metodo hacer sopa
 		strg = @@boards_templates [1]# ASSGIN the boards_templates[-1] to a variable
 		place_inner_array = 0 # ASSIG a variable to be use for the next loop
 		init = 0# ASSIGN a variable to  index[0] for tha iner array
@@ -16,11 +16,12 @@ class Board
 			final+=5 # ADD 5 to the index[-1] of inner array
 			place_inner_array += 1 #ADD 1 to the index of the soup
 		end
-		@@soup
-	end
+	 	#self  # permitir method chaining
+	end  # cerrar metodo "hacer sopa"
 
 	def find_up_down
-		word = @@boards_templates [0][1]#palabra buscada
+		made_soup
+		word = "CANCION"#@@boards_templates [0][1]#palabra buscada
 		vertical = ""#variable para colocar columnas
 		index_move = 0#variable para avanzar a tràves de las columnas
 		result_up_down = nil#resultado del metodo, vacio si no se encuentra la palabra
@@ -34,7 +35,9 @@ class Board
 		end
 		  p "#{word} encontrada de arriba hacia abajo" if result_up_down != nil #SI result_up_down no esta vacio se imprime resultado
 	end
+
 	def find_down_up
+		made_soup
 		inverted_board = []
 		@@soup.reverse.each_with_index do |ary,ind|
 			 inverted_board << ary.join.reverse  # invertir tablero de izquierda a derecha
@@ -55,6 +58,7 @@ class Board
 	end
 
 	def find_left_to_rigth
+		made_soup
 		word = @@boards_templates [0][0]#POEMA
 		result_left_to_rigth = nil
 				@@soup.each_with_index do |fila, index_f|#multidimensional so
@@ -67,6 +71,7 @@ class Board
 	end
 
 	def find_rigth_to_left
+		made_soup
 		inverted_board = []#arreglo para ingresar tablero invertido
 		word = @@boards_templates [0][0]#palabra buscada
 		result_rigth_to_left = nil #variable que devolverà el resultado
@@ -81,59 +86,90 @@ class Board
 		  p "#{word} encontrada de derecha a izquierda" if result_rigth_to_left != nil #SI result_up_down no esta vacio se imprime resultado
 	end
 
-	def diagonal_inf_rigth
+	def find_diagonal#-------------------------------BUSQUEDA DIAGONAL ---------------------------------
+		made_soup
 		# @@soup [row]  [outer_array] [column]
 		# @@soup [1]     [0]           [1]
-		index_row = 0 #indice de la fila
-		index_column = 0 #indci
-		word = "RN"#@@boards_templates [0][0]#palabra buscada
-		index_move = 0 #variable para moverse a tràves de las columnas
+		word = "NXXD"#@@boards_templates [0][0]#palabra buscada
 		result = nil #variable para colocar resultado si la palabra es colocada
-		#----------------- TRANSEVERSAL HACIA ARRIBA
-		until index_move >= @@soup[0][0].length #hasta que el indice alcance la longitud del la sopa
-			transversal = []#arreglo para
-			 transversal << one = @@soup [index_row][0][index_column]
-			 transversal << two = @@soup [index_row+=1][0][index_column+=1]
-			 transversal << three = @@soup [index_row+=1][0][index_column+=1]
-			 transversal << four = @@soup [index_row+=1][0][index_column+=1]
-			 transversal << five = @@soup [index_row+=1][0][index_column+=1]
-			index_row = 0
-			index_move += 1
-			index_column = index_move
-			result = transversal.join  if  transversal.compact.join.include? word
+		counter_inverted_soup = 0 #variable para aumantar mas uno si la palabra NO se encuentra de izquierda a derecha
+
+		until result != nil #loop para encontrar tambien de DERCHA A IZQUEIRDA
+			index_move = 0 #variable para moverse a tràves de las columnas
+			index_row = 0 #indice de la fila
+			index_column = 0 #indice de columna
+
+		#TRANSEVERSAL HACIA ARRIBA
+			until index_move >= @@soup[0][0].length #hasta que el indice alcance la longitud del la sopa
+				transversal = []#arreglo para
+				 transversal << one = @@soup [index_row][0][index_column]
+				 transversal << two = @@soup [index_row+=1][0][index_column+=1]
+				 transversal << three = @@soup [index_row+=1][0][index_column+=1]
+				 transversal << four = @@soup [index_row+=1][0][index_column+=1]
+				 transversal << five = @@soup [index_row+=1][0][index_column+=1]
+				index_row = 0
+				index_move += 1
+				index_column = index_move
+				if transversal.compact.join.include? word
+					result = transversal.join
+					p"#{word} de izquierda a derecha, de arriba hacia abajo"
+				end
+			end
+			#TRANSEVERSAL HACIA ABAJO
+			index_row = 0 #reiniciar los valores en 1 para omitir el transversal [0][0]
+			index_move = 0
+			until index_move >= @@soup.length #hasta que el indice alcance la longitud del la sopa
+				transversal = []#arreglo vacio para ingresar letras, se reinicia en cada iteracion
+				transversal << one = @@soup [index_row][0][0] #asignar 1era letra de cada fila a "one", despues empujarle a "transversal"
+				transversal << two = @@soup [index_row+=1][0][1] if index_row != @@soup.length - 1 # SI el indice de la fila es diferente de 7, asignar 2a letra de cada fila a "two", despues empujarle a "transversal"
+				transversal << three = @@soup [index_row+=1][0][2] if index_row != @@soup.length - 1 #SI el indice de la fila es diferente de 7,asignar 3a letra de cada fila a "three", despues empujarle a "transversal"
+				transversal << four = @@soup [index_row+=1][0][3] if index_row != @@soup.length - 1#SI el indice de la fila es diferente de 7,asignar 4a letra de cada fila a "four", despues empujarle a "transversal"
+				transversal << five = @@soup [index_row+=1][0][4] if index_row != @@soup.length - 1#SI el indice de la fila es diferente de 7,asignar 5a letra de cada fila a "four", despues empujarle a "transversal"
+				index_move += 1 # aumentar el contador de iteracion "until" + 1
+				index_row = index_move # asignar valor del contador a el inidice de las filas
+				if transversal.compact.join.include? word
+					result = transversal.join
+					p"#{word} de izquierda a derecha, de arriba hacia abajo"
+				end
+			end
+			#TRANSEVERSAL HACIA ARRIBA IZQUIERDA A DERECHA
+			@@soup.reverse!#invertir "sopa" con metodo destructivo,
+			index_row = -4 #reiniciar los valores en el indice de las filas en -4 de forma que la busqueda inicie desde la esquina inferior derecha
+			index_move = -4 #reiniciar los valores del contador de iteraciones en -4 de forma que la iteracion vaya de -4...8
+
+			until index_move >= @@soup.length #hasta que el indice alcance la longitud del la sopa
+				transversal = []#arreglo vacio para ingresar letras, se reinicia en cada iteracion
+				 transversal << one = @@soup [index_row][0][0] #asignar 1era letra de cada fila a "one", despues empujarle a "transversal"
+				 transversal << two = @@soup [index_row+=1][0][1] if index_row != @@soup.length - 1 # SI el indice de la fila es diferente de 7, asignar 2a letra de cada fila a "two", despues empujarle a "transversal"
+				transversal << three = @@soup [index_row+=1][0][2] if index_row != @@soup.length - 1 #SI el indice de la fila es diferente de 7,asignar 3a letra de cada fila a "three", despues empujarle a "transversal"
+				transversal << four = @@soup [index_row+=1][0][3] if index_row != @@soup.length - 1#SI el indice de la fila es diferente de 7,asignar 4a letra de cada fila a "four", despues empujarle a "transversal"
+				transversal << five = @@soup [index_row+=1][0][4] if index_row != @@soup.length - 1#SI el indice de la fila es diferente de 7,asignar 5a letra de cada fila a "four", despues empujarle a "transversal"
+				index_move += 1 # aumentar el contador de iteracion "until" + 1
+				index_row = index_move # asignar valor del contador a el inidice de las filas
+				if transversal.compact.join.include? word
+					result = transversal.join
+					p"#{word} de izquierda a derecha, de abajo hacia arriba"
+				end
+			end
 		end
-		#----------------- TRANSEVERSAL HACIA ABAJO
-		index_row = 1
-		index_move = 1
-		until index_move >= @@soup.length #hasta que el indice alcance la longitud del la sopa
-			transversal = []#arreglo vacio para ingresar letras, se reinicia en cada iteracion
-			 transversal << one = @@soup [index_row][0][0] #asignar 1era letra de cada fila a "one", despues empujarle a "transversal"
-			 transversal << two = @@soup [index_row+=1][0][1] if index_row != @@soup.length - 1 # SI el indice de la fila es diferente de 7, asignar 2a letra de cada fila a "two", despues empujarle a "transversal"
-			transversal << three = @@soup [index_row+=1][0][2] if index_row != @@soup.length - 1 #SI el indice de la fila es diferente de 7,asignar 3a letra de cada fila a "three", despues empujarle a "transversal"
-			transversal << four = @@soup [index_row+=1][0][3] if index_row != @@soup.length - 1#SI el indice de la fila es diferente de 7,asignar 4a letra de cada fila a "four", despues empujarle a "transversal"
-			transversal << five = @@soup [index_row+=1][0][4] if index_row != @@soup.length - 1#SI el indice de la fila es diferente de 7,asignar 5a letra de cada fila a "four", despues empujarle a "transversal"
-			index_move += 1 # aumentar el contador de iteracion "until" + 1
-			index_row = index_move # asignar valor del contador a el inidice de las filas
-			result = transversal.join  if  transversal.join.include? word #SI el el arreglo "transversal", convertido a string, incluye la palabra buscada asignar el valor a "result"
-		end
-		  p result if result!=nil
+		p "entrado en diagonal"  if result != nil
+		counter_inverted_soup +=1 if result == nil
 	end
 
-  def initialize
-	 	complete_board!
-  end
-
-  def to_s
-	  "try to print a board, what does this method do?"
-  end
-
-  private
-
-  def complete_board!
-	 		 #Este método debe rellenar un tablero incompleto, en otras palabras cambiar las "x" por letras random.
-  end
+  # def initialize
+	#  	complete_board!
+  # end
+	#
+  # def to_s
+	#   "try to print a board, what does this method do?"
+  # end
+	#
+  # private
+	#
+  # def complete_board!
+	#  		 #Este método debe rellenar un tablero incompleto, en otras palabras cambiar las "x" por letras random.
+  # end
 end
 
 board = Board.new
-board.made_soup
-board.diagonal_inf_rigth
+board.find_diagonal
