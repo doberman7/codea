@@ -4,7 +4,7 @@ class Board
 	#[["MANGO", "SANDIA", "MELON", "PLATANO"],"XXXXPXXXXLXAMXAXIEXTXDLXAXNOXNMANGOXSXXX"]
 	#[["ROJO", "VERDE", "AZUL", "NEGRO"],"OJORXXXXXXXEXXOXDXRXXRGLXXEXUXNVXZXXXXAX"]
 	@@soup = Array.new(8) { Array.new(0) } # CREATE a multidimensional array of 8 row's
-
+	@@pre_soup = ""
 	def initialize
 	 	complete_board!
 		find_diagonal_derecha_izquieda
@@ -18,7 +18,7 @@ class Board
 
 
 	def made_soup #para crear  sopa
-		strg = @@boards_templates [1]# ASSGIN the boards_templates[-1] to a variable
+		strg = @@pre_soup# ASSGIN the boards_templates[-1] to a variable
 		place_inner_array = 0 # ASSIG a variable to be use for the next loop
 		init = 0# ASSIGN a variable to  index[0] for tha iner array
 		final = 4# ASSIGN a variable to  index[-1] for the iner array
@@ -306,11 +306,13 @@ class Board
   private
 
   def complete_board!
-	 		 #Este método debe rellenar un tablero incompleto, en otras palabras cambiar las "x" por letras random.
-			 @@pre_soup = ""
+	 		#Este método debe rellenar un tablero incompleto, en otras palabras cambiar las "x" por letras random.
+			#rand(36**1).to_s(36) genera strings aleatorios, preguntar a ABEL porqué
+			#random_letter = ""; 1.times{random_letter  << (65 + rand(25)).chr}
+
 			@@boards_templates [1].each_char do |chr|
 				if chr == "X"
-					chr = rand(1..9)
+					chr = random_letter = ""; 1.times{random_letter  << (65 + rand(25)).chr}
 					@@pre_soup << chr
 				else
 					@@pre_soup << chr
