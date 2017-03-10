@@ -1,5 +1,6 @@
-Initialize 2D array with 81 empty grids (nx = 9, ny = 9)
+
  Fill in some empty grid with the known values
+
  Make an original copy of the array
  Start from top left grid (nx = 0, ny = 0), check if grid is empty
  if (grid is empty) {
